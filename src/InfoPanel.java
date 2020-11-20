@@ -3,7 +3,7 @@ import java.awt.*;
 
 public class InfoPanel extends JPanel {
 
-    public static JLabel score, info, direction;
+    public static JLabel score = new JLabel("Score: 0",  SwingConstants.CENTER), info, direction = new JLabel("NONE",  SwingConstants.CENTER);
 
     InfoPanel() {
         this.setPreferredSize(new Dimension(500, 50));

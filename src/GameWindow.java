@@ -35,11 +35,11 @@ public class GameWindow extends JFrame implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_LEFT && !(GamePanel.snakeDirection.equals("WEST")))
+        if (e.getKeyCode() == KeyEvent.VK_LEFT && !(GamePanel.snakeDirection.equals("EAST")))
             GamePanel.snakeDirection = "WEST";
         else if (e.getKeyCode() == KeyEvent.VK_UP && !(GamePanel.snakeDirection.equals("SOUTH")))
             GamePanel.snakeDirection = "NORTH";
-        else if (e.getKeyCode() == KeyEvent.VK_RIGHT && !(GamePanel.snakeDirection.equals("EAST")))
+        else if (e.getKeyCode() == KeyEvent.VK_RIGHT && !(GamePanel.snakeDirection.equals("WEST")))
             GamePanel.snakeDirection = "EAST";
         else if (e.getKeyCode() == KeyEvent.VK_DOWN && !(GamePanel.snakeDirection.equals("NORTH")))
             GamePanel.snakeDirection = "SOUTH";

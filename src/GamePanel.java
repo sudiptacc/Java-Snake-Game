@@ -10,7 +10,7 @@ public class GamePanel extends JPanel implements ActionListener {
     // Variables
     public static String snakeDirection = "NONE";
     private final int PANEL_WIDTH = 500, PANEL_HEIGHT = 500;
-    public static int ax, ay, score = 0;
+    public static int ax, ay, difficulty, score = 0;
     public ArrayList<ArrayList<Integer>> snakeBody = new ArrayList<>();
     private final Random RANDOM;
     private final Timer TIMER;
@@ -23,7 +23,7 @@ public class GamePanel extends JPanel implements ActionListener {
         snakeBody.add(new ArrayList<>(Arrays.asList(180, 140)));
         this.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
         this.setBackground(Color.BLACK);
-        TIMER = new Timer(100, this);
+        TIMER = new Timer(difficulty, this);
         TIMER.start();
         RANDOM = new Random();
         // Create random coordinates for apple
