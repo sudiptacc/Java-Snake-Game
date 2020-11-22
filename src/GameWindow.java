@@ -4,6 +4,7 @@ import java.awt.event.*;
 
 public class GameWindow extends JFrame implements KeyListener {
 
+    private static final long serialVersionUID = 8224333122641964095L;
     GamePanel gpanel;
     InfoPanel ipanel;
     GridBagConstraints constraints;
@@ -37,12 +38,26 @@ public class GameWindow extends JFrame implements KeyListener {
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_LEFT && !(GamePanel.snakeDirection.equals("EAST")))
             GamePanel.snakeDirection = "WEST";
+        else if (e.getKeyCode() == KeyEvent.VK_A && !(GamePanel.snakeDirection.equals("EAST")))
+            GamePanel.snakeDirection = "WEST";
         else if (e.getKeyCode() == KeyEvent.VK_UP && !(GamePanel.snakeDirection.equals("SOUTH")))
+            GamePanel.snakeDirection = "NORTH";
+        else if (e.getKeyCode() == KeyEvent.VK_W && !(GamePanel.snakeDirection.equals("SOUTH")))
             GamePanel.snakeDirection = "NORTH";
         else if (e.getKeyCode() == KeyEvent.VK_RIGHT && !(GamePanel.snakeDirection.equals("WEST")))
             GamePanel.snakeDirection = "EAST";
+        else if (e.getKeyCode() == KeyEvent.VK_D && !(GamePanel.snakeDirection.equals("WEST")))
+            GamePanel.snakeDirection = "EAST";
         else if (e.getKeyCode() == KeyEvent.VK_DOWN && !(GamePanel.snakeDirection.equals("NORTH")))
             GamePanel.snakeDirection = "SOUTH";
+        else if (e.getKeyCode() == KeyEvent.VK_S && !(GamePanel.snakeDirection.equals("NORTH")))
+            GamePanel.snakeDirection = "SOUTH";
+        else if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
+            if (GamePanel.playing) {
+                GamePanel.playing = false;
+            } else {
+                GamePanel.playing = true;
+            }
     }
 
     @Override

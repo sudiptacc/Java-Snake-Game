@@ -7,10 +7,11 @@ import java.util.Random;
 
 public class GamePanel extends JPanel implements ActionListener {
 
-    // Variables
+    private static final long serialVersionUID = 2897781269980936757L;
     public static String snakeDirection = "NONE";
     private final int PANEL_WIDTH = 500, PANEL_HEIGHT = 500;
-    public static int ax, ay, difficulty, score = 0;
+    public static int ax, ay, difficulty, score = 0, highscore = 0;
+    public static boolean playing = true;
     public ArrayList<ArrayList<Integer>> snakeBody = new ArrayList<>();
     private final Random RANDOM;
     private final Timer TIMER;
@@ -31,24 +32,32 @@ public class GamePanel extends JPanel implements ActionListener {
     }
 
     public void paint(Graphics g) {
-        // Reset Board
         super.paint(g);
         Graphics2D graphics = (Graphics2D) g;
-        // Grid
-        graphics.setPaint(Color.DARK_GRAY);
-        for (int i = 0; i < PANEL_WIDTH/20; i++) {
-            g.drawLine(i*20, 0, i*20, PANEL_HEIGHT);
+        if (!playing) {
+            graphics.setPaint(new Color(102, 102, 102));
+            graphics.fillRect(0, 0, 500, 500);
+            graphics.setPaint(Color.WHITE);
+            graphics.setFont(new Font("Arial Black", Font.PLAIN, 56));
+            graphics.drawString("PAUSED", 125, 250);
+        } else {
+            // Grid
+            graphics.setPaint(Color.DARK_GRAY);
+            for (int i = 0; i < PANEL_WIDTH/20; i++) {
+                g.drawLine(i*20, 0, i*20, PANEL_HEIGHT);
+            }
+            for (int i = 0; i < PANEL_HEIGHT/20; i++) {
+                g.drawLine(0, i*20, PANEL_WIDTH, i*20);
+            }
+            // Whole Snake
+            graphics.setPaint(Color.GREEN);
+            for (ArrayList<Integer> snakePoint : snakeBody)
+                graphics.fillRect(snakePoint.get(0), snakePoint.get(1), 20, 20);
+            // Apple
+            graphics.setPaint(Color.RED);
+            graphics.fillRect(ax, ay, 20, 20);
         }
-        for (int i = 0; i < PANEL_HEIGHT/20; i++) {
-            g.drawLine(0, i*20, PANEL_WIDTH, i*20);
-        }
-        // Whole Snake
-        graphics.setPaint(Color.GREEN);
-        for (ArrayList<Integer> snakePoint : snakeBody)
-            graphics.fillRect(snakePoint.get(0), snakePoint.get(1), 20, 20);
-        // Apple
-        graphics.setPaint(Color.RED);
-        graphics.fillRect(ax, ay, 20, 20);
+        
     }
 
     public void check() {
@@ -69,22 +78,30 @@ public class GamePanel extends JPanel implements ActionListener {
         // APPLE EATEN
         if (snakeBody.get(0).get(0) == ax && snakeBody.get(0).get(1) == ay) {
             switch (snakeDirection) {
-                case "NORTH" -> snakeBody.add(new ArrayList<>(Arrays.asList(
+                case "NORTH": 
+                    snakeBody.add(new ArrayList<>(Arrays.asList(
                         snakeBody.get(snakeBody.size() - 1).get(0),
                         snakeBody.get(snakeBody.size() - 1).get(1) + 20
-                )));
-                case "SOUTH" -> snakeBody.add(new ArrayList<>(Arrays.asList(
+                    )));
+                    break;
+                case "SOUTH": 
+                    snakeBody.add(new ArrayList<>(Arrays.asList(
                         snakeBody.get(snakeBody.size() - 1).get(0),
                         snakeBody.get(snakeBody.size() - 1).get(1) - 20
-                )));
-                case "WEST" -> snakeBody.add(new ArrayList<>(Arrays.asList(
+                    )));
+                    break;
+                case "WEST": 
+                    snakeBody.add(new ArrayList<>(Arrays.asList(
                         snakeBody.get(snakeBody.size() - 1).get(0) + 20,
                         snakeBody.get(snakeBody.size() - 1).get(1)
-                )));
-                case "EAST" -> snakeBody.add(new ArrayList<>(Arrays.asList(
+                    )));
+                    break;
+                case "EAST": 
+                    snakeBody.add(new ArrayList<>(Arrays.asList(
                         snakeBody.get(snakeBody.size() - 1).get(0) - 20,
                         snakeBody.get(snakeBody.size() - 1).get(1)
-                )));
+                    )));
+                    break;
             }
             newApple();
             score++;
@@ -125,18 +142,28 @@ public class GamePanel extends JPanel implements ActionListener {
             snakeBody.get(i).set(1, snakeBody.get(i - 1).get(1));
         }
         switch (snakeDirection) {
-            case "NORTH" -> snakeBody.get(0).set(1, snakeBody.get(0).get(1) - 20);
-            case "SOUTH" -> snakeBody.get(0).set(1, snakeBody.get(0).get(1) + 20);
-            case "WEST" -> snakeBody.get(0).set(0, snakeBody.get(0).get(0) - 20);
-            case "EAST" -> snakeBody.get(0).set(0, snakeBody.get(0).get(0) + 20);
+            case "NORTH": 
+                snakeBody.get(0).set(1, snakeBody.get(0).get(1) - 20);
+                break;
+            case "SOUTH": 
+                snakeBody.get(0).set(1, snakeBody.get(0).get(1) + 20);
+                break;
+            case "WEST":
+                snakeBody.get(0).set(0, snakeBody.get(0).get(0) - 20);
+                break;
+            case "EAST":
+                snakeBody.get(0).set(0, snakeBody.get(0).get(0) + 20);
+                break;
         }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         // Lose conditions LEFT/RIGHT
-        move();
-        check();
+        if (playing) {
+            move();
+            check();
+        }
         repaint();
     }
 }

@@ -3,20 +3,17 @@ import java.awt.*;
 
 public class InfoPanel extends JPanel {
 
-    public static JLabel score = new JLabel("Score: 0",  SwingConstants.CENTER), info, direction = new JLabel("NONE",  SwingConstants.CENTER);
+    private static final long serialVersionUID = -2672022111178171467L;
+    public static JLabel score = new JLabel("Score: 0", SwingConstants.CENTER), 
+                         highscore = new JLabel("Highscore: 0", SwingConstants.CENTER);
 
     InfoPanel() {
         this.setPreferredSize(new Dimension(500, 50));
         this.setLayout(new GridLayout());
         this.setBackground(Color.BLACK);
-        score = new JLabel("Score: 0", SwingConstants.CENTER);
-        info = new JLabel("Snake!", SwingConstants.CENTER);
-        direction = new JLabel("NONE", SwingConstants.CENTER);
         score.setForeground(Color.WHITE);
-        info.setForeground(Color.WHITE);
-        direction.setForeground(Color.WHITE);
+        highscore.setForeground(Color.WHITE);
         this.add(score);
-        this.add(info);
-        this.add(direction);
+        this.add(highscore);
     }
 }

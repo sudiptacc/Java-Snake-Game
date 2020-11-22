@@ -3,9 +3,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-// Snake => GameWindow => LaunchWindow => GameWindow
+// Snake => LaunchWindow => GameWindow
 public class LaunchWindow extends JFrame implements ActionListener {
 
+    private static final long serialVersionUID = -4981946507120588622L;
     GridBagConstraints constraints;
     ButtonGroup group;
     JRadioButton easy, medium, hard;
