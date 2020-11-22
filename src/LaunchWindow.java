@@ -12,6 +12,7 @@ public class LaunchWindow extends JFrame implements ActionListener {
     JRadioButton easy, medium, hard;
     JButton confirm;
     JPanel panel;
+    ImageIcon icon;
 
     LaunchWindow() {
         try {
@@ -28,6 +29,7 @@ public class LaunchWindow extends JFrame implements ActionListener {
         confirm.addActionListener(this);
         panel = new JPanel();
         panel.setLayout(new GridBagLayout());
+        icon = new ImageIcon(getClass().getResource("icon.png"));
         constraints.gridx = 0;
         constraints.gridy = 0;
         constraints.insets = new Insets(5, 5, 5, 5);
@@ -44,6 +46,7 @@ public class LaunchWindow extends JFrame implements ActionListener {
         group.add(hard);
         this.setTitle("Choose a difficulty!");
         this.setSize(200, 250);
+        this.setIconImage(icon.getImage());
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
         this.setLocationRelativeTo(null);

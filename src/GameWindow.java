@@ -8,6 +8,7 @@ public class GameWindow extends JFrame implements KeyListener {
     GamePanel gpanel;
     InfoPanel ipanel;
     GridBagConstraints constraints;
+    ImageIcon icon;
 
     GameWindow() {
         try {
@@ -18,12 +19,14 @@ public class GameWindow extends JFrame implements KeyListener {
         gpanel = new GamePanel();
         ipanel = new InfoPanel();
         constraints = new GridBagConstraints();
+        icon = new ImageIcon(getClass().getResource("icon.png"));
         constraints.gridx = 0;
         constraints.gridy = 0;
         this.setLayout(new GridBagLayout());
         this.setTitle("Snake!");
         this.setSize(500, 550);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setIconImage(icon.getImage());
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.addKeyListener(this);
